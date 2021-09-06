@@ -12,7 +12,7 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
 
-  List<MyRadio> radios;
+  List<MyRadio> radios = [];
 
   @override
   void initState() {
@@ -59,16 +59,26 @@ class _HomepageState extends State<Homepage> {
             ),
             centerTitle: true,
             backgroundColor: Colors.transparent,
-          )
-          
+          ),
           VxSwiper.builder(
               itemCount: radios.length,
               aspectRatio: 1.0,
-              itemBuilder: (context, index){
 
-              }
+            itemBuilder: (context,index) {
+                final rad = radios[index];
+                return VxBox(
+                  child: ZStack(
+                      [
+
+                      ],
+                  ),
+                )
+                    .bgImage(DecorationImage(image: NetworkImage(rad.image)))
+                    .make();
+
+
+                },
           ),
-          
         ],
       ),
     );
