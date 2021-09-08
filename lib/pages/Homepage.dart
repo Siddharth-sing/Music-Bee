@@ -45,8 +45,7 @@ class _HomepageState extends State<Homepage> {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
-              )
-              .make(),
+              ).make(),
           AppBar(
             title: Text(
               'AI Radio',
@@ -139,6 +138,17 @@ class _HomepageState extends State<Homepage> {
                   .p16()
                   .centered();
             },
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(0, 0, 0, 70),
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Icon(
+                Icons.stop_circle_outlined,
+                color: Colors.white.withOpacity(0.6),
+                size: 60,
+              )
+            ),
           ),
         ],
         fit: StackFit.expand,
