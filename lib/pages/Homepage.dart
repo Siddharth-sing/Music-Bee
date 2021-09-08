@@ -70,6 +70,20 @@ class _HomepageState extends State<Homepage> {
                 child: ZStack(
                   [
                     Align(
+                        alignment: Alignment.topRight,
+                        child:Container(
+                          margin: EdgeInsets.fromLTRB(0, 20, 35, 0) ,
+                          child: Text(
+                            "${rad.category}",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                    ),
+                    Align(
                       alignment: Alignment.bottomCenter,
                       child: Container(
                         margin: EdgeInsets.fromLTRB(0,0,0,10),
@@ -121,6 +135,7 @@ class _HomepageState extends State<Homepage> {
                   .border(color: Colors.black, width: 5.0)
                   .withRounded(value: 60.0)
                   .make()
+                  .onInkDoubleTap(() {})
                   .p16()
                   .centered();
             },
