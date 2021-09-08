@@ -74,7 +74,7 @@ class _HomepageState extends State<Homepage> {
                         child:Container(
                           margin: EdgeInsets.fromLTRB(0, 20, 35, 0) ,
                           child: Text(
-                            "${rad.category}",
+                            "${rad.category}".toUpperCase(),
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 14,
