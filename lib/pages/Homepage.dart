@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,7 +12,6 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-
   List<MyRadio> radios = [];
 
   @override
@@ -21,9 +21,9 @@ class _HomepageState extends State<Homepage> {
     fetchRadios();
   }
 
-  fetchRadios() async{
+  fetchRadios() async {
     final radioJson = await rootBundle.loadString("asset/radio.json");
-    radios =  MyRadioList.fromJson(radioJson).radios;
+    radios = MyRadioList.fromJson(radioJson).radios;
     print(radios);
     setState(() {});
   }
@@ -33,22 +33,23 @@ class _HomepageState extends State<Homepage> {
     return Scaffold(
       drawer: Drawer(),
       body: Stack(
-        children:<Widget> [
+        children: <Widget>[
           VxAnimatedBox()
-            .size(context.screenWidth, context.screenHeight)
-            .withGradient(
-          LinearGradient(
-            colors: [
-              aiColors.primaryolor1,
-              aiColors.primaryolor2,
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-        ).make(),
+              .size(context.screenWidth, context.screenHeight)
+              .withGradient(
+                LinearGradient(
+                  colors: [
+                    aiColors.primaryolor1,
+                    aiColors.primaryolor2,
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+              )
+              .make(),
           AppBar(
             title: Text(
-                'AI Radio',
+              'AI Radio',
               style: TextStyle(
                 fontFamily: GoogleFonts.poppins().fontFamily,
                 fontSize: 28,
@@ -61,25 +62,71 @@ class _HomepageState extends State<Homepage> {
             backgroundColor: Colors.transparent,
           ),
           VxSwiper.builder(
-              itemCount: radios.length,
-              aspectRatio: 1.0,
-
-            itemBuilder: (context,index) {
-                final rad = radios[index];
-                return VxBox(
-                  child: ZStack(
-                      [
-
-                      ],
-                  ),
-                )
-                    .bgImage(DecorationImage(image: NetworkImage(rad.image)))
-                    .make();
-
-
-                },
+            itemCount: radios.length,
+            aspectRatio: 1.0,
+            itemBuilder: (context, index) {
+              final rad = radios[index];
+              return VxBox(
+                child: ZStack(
+                  [
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                        margin: EdgeInsets.fromLTRB(0,0,0,10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            Text(
+                              '${rad.name}',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold
+                              ),
+                            ),
+                            Text(
+                              "${rad.tagline}",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment:Alignment.center,
+                      child: Icon(
+                        CupertinoIcons.play_circle,
+                        color: Colors.white.withOpacity(0.7),
+                        size: 70,
+                      ),
+                    ),
+                  ],
+                ),
+              ).bgImage(
+                    DecorationImage(
+                      image: NetworkImage(rad.image),
+                      fit: BoxFit.cover,
+                      colorFilter: ColorFilter.mode(
+                        Colors.black.withOpacity(0.3),
+                        BlendMode.darken,
+                      ),
+                    ),
+                  )
+                  .border(color: Colors.black, width: 5.0)
+                  .withRounded(value: 60.0)
+                  .make()
+                  .p16()
+                  .centered();
+            },
           ),
         ],
+        fit: StackFit.expand,
       ),
     );
   }
