@@ -7,6 +7,7 @@ import 'package:music_bee/model/radio.dart';
 import 'package:music_bee/utils/aiUtils.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+
 class Homepage extends StatefulWidget {
   @override
   _HomepageState createState() => _HomepageState();
@@ -42,8 +43,9 @@ class _HomepageState extends State<Homepage> {
     setState(() {});
   }
   _playMusic(String url) {
+
     _audioPlayer.play(url);
-    _selectedRadio = radios.firstWhere((element) {
+     _selectedRadio = radios.firstWhere((element) {
       return element.url == url;
     });
     print(_selectedRadio.name);
@@ -61,8 +63,8 @@ class _HomepageState extends State<Homepage> {
               .withGradient(
             LinearGradient(
               colors: [
-                aiColors.primaryolor1,
-                aiColors.primaryolor2,
+                Colors.orange,
+                _selectedColor ,
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -85,6 +87,14 @@ class _HomepageState extends State<Homepage> {
          radios!=null?VxSwiper.builder(
             itemCount: radios.length,
             aspectRatio: 1.0,
+            enlargeCenterPage: true,
+            onPageChanged: (index){
+              final color = radios[index].color;
+              setState(() {
+                _selectedColor = Color(int.tryParse(color));
+              });
+
+            } ,
             itemBuilder: (context, index) {
               final rad = radios[index];
               return VxBox(
