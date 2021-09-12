@@ -42,11 +42,26 @@ class _HomepageState extends State<Homepage> {
     AlanVoice.addButton(
         "abe5509444db4ff9bd0af2a9d4f3bb612e956eca572e1d8b807a3e2338fdd0dc/stage",
         buttonAlign: AlanVoice.BUTTON_ALIGN_RIGHT);
+    AlanVoice.callbacks.add((command)  {
+         _handleCommand(command.data);
+    });
+  }
+  _handleCommand(Map<String, dynamic> response){
+        switch(response["command"])
+        {
+          case "play":
+            _playMusic(_selectedRadio.url);
+          break;
+          default: print("Default");
+          break;
+        }
   }
 
   fetchRadios() async {
     final radioJson = await rootBundle.loadString("asset/radio.json");
     radios = MyRadioList.fromJson(radioJson).radios;
+    _selectedRadio = radios[0];
+    _selectedColor = Color(int.tryParse(_selectedRadio.color));
     print(radios);
     setState(() {});
   }
