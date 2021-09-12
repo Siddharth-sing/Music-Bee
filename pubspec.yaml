@@ -18,6 +18,7 @@ dependencies:
   velocity_x: ^3.3.0
   audioplayers: ^0.16.0
   google_fonts: ^1.1.2
+  alan_voice: ^2.4.0
 
 
 dev_dependencies:
